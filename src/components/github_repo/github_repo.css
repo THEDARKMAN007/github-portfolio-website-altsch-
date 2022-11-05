@@ -1,0 +1,55 @@
+.github_repo_container {
+  width: 18em;
+  min-width: auto;
+  height: 2em;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  margin: 5em auto;
+  box-shadow: 5px 5px 0px 0px grey;
+  font-weight: 600;
+  font-size: max(1rem, 2vw);
+}
+.github_repo_container:hover{
+    background-color: darkblue;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination_buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+}
+
+.pagination_buttons div{
+    width: 4em;
+    height: auto;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: 600;
+    background-color: white;
+  font-size: max(1rem, 2vw);
+}
+
+.pagination_buttons div:hover{
+    cursor: pointer;
+    background-color: grey;
+    color: white;
+}
+
+.invisible{
+  visibility: hidden;
+}
+
+.post{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+}

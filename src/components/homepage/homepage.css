@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #faebd7;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 2em;
+  margin: 0 auto;
+  background-color: grey;
+  color: white;
+  font-weight: 600;
+  font-size: max(1rem, 2vw);
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+.link:hover{
+    color: darkblue;
+    cursor: pointer;
+}
+
+.main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(20rem, 60vw, 80rem);
+  min-height: 5rem;
+  gap: 2em;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+img {
+  border-radius: 50%;
+  width: clamp(8rem, 20vw, 16rem);
+  height: clamp(8rem, 20vw, 16rem);
+}
+.intro {
+  font-size: clamp(1.5rem, 4.7vw, 6rem);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.redirect {
+  font-size: clamp(1rem, 3.1vw, 4rem);
+}
+.redirect Link {
+  text-decoration: none;
+  color: blue;
+}
+.redirect span {
+  cursor: pointer;
+  color: blue;
+}
