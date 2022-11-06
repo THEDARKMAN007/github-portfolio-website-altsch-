@@ -4,15 +4,19 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ErrorBoundary from './components/error_boundary/error_boundary';
+import { HelmetProvider } from 'react-helmet-async';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ErrorBoundary>
-    <Router>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </Router>
+    </HelmetProvider>
   </ErrorBoundary>
 );
 

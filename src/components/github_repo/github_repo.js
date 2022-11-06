@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate,useLocation } from "react-router-dom";
 import { Github } from './../github/github';
+import { Helmet } from "react-helmet-async";
+
 
 export const GithubRepo = () => {
   const [state4, setState4] = useState([
@@ -121,18 +123,19 @@ export const GithubRepo = () => {
 
   return (
     <div>
-      <header>
-        <div>
-          <div className="link" onClick={navigateToHome}>
-            Home
-          </div>
+      <Helmet>
+        <title>Homepage</title>
+        <meta name="description" content="github repository list" />
+        <link rel="canonical" href="/github_repo" />
+      </Helmet>
+      <div className="header">
+        <div className="link" onClick={navigateToHome}>
+          Home
         </div>
-        <div>
-          <div className="link" onClick={navigateToGithub}>
-            GitHub Repo.
-          </div>
+        <div className="link" onClick={navigateToGithub}>
+          GitHub Repo.
         </div>
-      </header>
+      </div>
       <div className={visible ? "post" : "invisible"}>
         <main>
           <div className="github_repo_container" onClick={seeRepoInfo}>

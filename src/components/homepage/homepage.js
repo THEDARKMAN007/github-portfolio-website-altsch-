@@ -1,6 +1,7 @@
 import "./homepage.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 export const HomePage = () => {
   const [state2, setState2] = useState({});
@@ -32,17 +33,22 @@ export const HomePage = () => {
 
   return (
     <div>
-      <header>
+      <Helmet>
+        <title>Homepage</title>
+        <meta name="description" content="github portfolio homepage" />
+        <link rel="canonical" href="/" />
+      </Helmet>
+      <div className="header">
         <div className="link" onClick={navigateToHome}>
           Home
         </div>
         <div className="link" onClick={navigateToGithub}>
           GitHub Repo.
         </div>
-      </header>
+      </div>
       <main className="main">
         <img src={state2.avatar_url} alt="user_image" />
-        <div className="intro">Hi, am {state2.name}</div>
+        <h1 className="intro">Hi, am {state2.name}</h1>
         <div className="redirect">
           <span onClick={goToRepo}>click here</span> to see my repo.
         </div>

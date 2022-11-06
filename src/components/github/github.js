@@ -1,10 +1,8 @@
 import "./github.css";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
 export const Github = (props) => {
-  const navigate = useNavigate();
   const [state8, setState8] = useState({
     name: "",
     description: "",
@@ -19,30 +17,10 @@ export const Github = (props) => {
     setState8(props.state7);
   }, [props.state7]);
 
-  const navigateToHome = (e) => {
-    e.preventDefault();
-    navigate("/");
-  };
-  const navigateToGithub = (e) => {
-    e.preventDefault();
-    navigate("/github_repo");
-  };
 
   return (
     <div className={props.visible ? "invisible" : ""}>
-      <header>
-        <div>
-          <div className="link" onClick={navigateToHome}>
-            Home
-          </div>
-        </div>
-        <div>
-          <div className="link" onClick={navigateToGithub}>
-            GitHub Repo.
-          </div>
-        </div>
-      </header>
-      <main className="repo_container">
+      <div className="repo_container">
         <div>REPO_NAME: {state8.name}</div>
         <div>DESC.: {state8.description}</div>
         <div>FILE_SIZE: {state8.size}</div>
@@ -54,7 +32,7 @@ export const Github = (props) => {
             github
           </a>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
