@@ -47,7 +47,8 @@ export const HomePage = () => {
         </div>
       </div>
       <main className="main">
-        <img src={state2.avatar_url} alt="user_image" />
+        <img src={state2.avatar_url} alt="user_image" style={{ width: 'clamp(8rem, 20vw, 16rem)',
+  height: 'clamp(8rem, 20vw, 16rem)'}}/>
         <h1 className="intro">Hi, am {state2.name}</h1>
         <div className="redirect">
           <span onClick={goToRepo}>click here</span> to see my repo.
