@@ -1,0 +1,33 @@
+[debug] [2022-11-06T18:47:36.501Z] ----------------------------------------------------------------------
+[debug] [2022-11-06T18:47:36.503Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\adams\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2022-11-06T18:47:36.504Z] CLI Version:   11.16.0
+[debug] [2022-11-06T18:47:36.504Z] Platform:      win32
+[debug] [2022-11-06T18:47:36.504Z] Node Version:  v16.16.0
+[debug] [2022-11-06T18:47:36.505Z] Time:          Sun Nov 06 2022 19:47:36 GMT+0100 (West Africa Standard Time)
+[debug] [2022-11-06T18:47:36.506Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-06T18:47:36.650Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-06T18:47:36.651Z] > authorizing via signed-in user (aabdulsamadsadiq@gmail.com)
+[debug] [2022-11-06T18:47:36.651Z] [iam] checking project github-portfolio-4cd77 for permissions ["firebase.projects.get"]
+[debug] [2022-11-06T18:47:36.653Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-portfolio-4cd77:testIamPermissions [none]
+[debug] [2022-11-06T18:47:36.653Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-portfolio-4cd77:testIamPermissions x-goog-quota-user=projects/github-portfolio-4cd77
+[debug] [2022-11-06T18:47:36.653Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-portfolio-4cd77:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-11-06T18:47:38.049Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-portfolio-4cd77:testIamPermissions 200
+[debug] [2022-11-06T18:47:38.050Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-portfolio-4cd77:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-11-06T18:47:38.052Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77 [none]
+[debug] [2022-11-06T18:47:38.674Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77 200
+[debug] [2022-11-06T18:47:38.675Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77 {"projectId":"github-portfolio-4cd77","projectNumber":"620544886720","displayName":"github-portfolio","name":"projects/github-portfolio-4cd77","resources":{"hostingSite":"github-portfolio-4cd77"},"state":"ACTIVE","etag":"1_0e444b82-016a-44a6-ac3a-df3d0ceb58c8"}
+[info] 
+[info] === Serving from 'C:\Users\adams\Downloads\ALTSCHOOLAFRICA\2. 2nd semester\2.frontend eng. second semester\2nd semester assement projects\github-website'...
+[info] 
+[debug] [2022-11-06T18:47:38.682Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/github-portfolio-4cd77/sites 
+[debug] [2022-11-06T18:47:39.668Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/github-portfolio-4cd77/sites 200
+[debug] [2022-11-06T18:47:39.669Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/github-portfolio-4cd77/sites {"sites":[{"name":"projects/github-portfolio-4cd77/sites/github-portfolio-4cd77","defaultUrl":"https://github-portfolio-4cd77.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-11-06T18:47:39.669Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77/webApps/-/config [none]
+[debug] [2022-11-06T18:47:40.864Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77/webApps/-/config 200
+[debug] [2022-11-06T18:47:40.864Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77/webApps/-/config {"projectId":"github-portfolio-4cd77","storageBucket":"github-portfolio-4cd77.appspot.com","apiKey":"AIzaSyDoG6tpduW3kpqCU9EL-wdXPF14ZOzc54g","authDomain":"github-portfolio-4cd77.firebaseapp.com","messagingSenderId":"620544886720"}
+[debug] [2022-11-06T18:47:40.872Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77 [none]
+[debug] [2022-11-06T18:47:41.420Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77 200
+[debug] [2022-11-06T18:47:41.420Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/github-portfolio-4cd77 {"projectId":"github-portfolio-4cd77","projectNumber":"620544886720","displayName":"github-portfolio","name":"projects/github-portfolio-4cd77","resources":{"hostingSite":"github-portfolio-4cd77"},"state":"ACTIVE","etag":"1_0e444b82-016a-44a6-ac3a-df3d0ceb58c8"}
+[info] i  hosting[github-portfolio-4cd77]: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] +  hosting[github-portfolio-4cd77]: Local server: http://localhost:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5002\u001b[22m\u001b[24m"}}

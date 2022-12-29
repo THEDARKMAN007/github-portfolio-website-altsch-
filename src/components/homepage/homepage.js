@@ -31,6 +31,8 @@ export const HomePage = () => {
       });
   }, []);
 
+  console.log(state2)
+
   return (
     <div>
       <Helmet>
@@ -38,14 +40,14 @@ export const HomePage = () => {
         <meta name="description" content="github portfolio homepage" />
         <link rel="canonical" href="/" />
       </Helmet>
-      <div className="header">
+      <header className="header">
         <div className="link" onClick={navigateToHome}>
           Home
         </div>
         <div className="link" onClick={navigateToGithub}>
           GitHub Repo.
         </div>
-      </div>
+      </header>
       <main className="main">
         <img src={state2.avatar_url} alt="user_image" style={{ width: 'clamp(8rem, 20vw, 16rem)',
   height: 'clamp(8rem, 20vw, 16rem)'}}/>

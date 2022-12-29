@@ -128,14 +128,14 @@ export const GithubRepo = () => {
         <meta name="description" content="github repository list" />
         <link rel="canonical" href="/github_repo" />
       </Helmet>
-      <div className="header">
+      <header className="header">
         <div className="link" onClick={navigateToHome}>
           Home
         </div>
         <div className="link" onClick={navigateToGithub}>
           GitHub Repo.
         </div>
-      </div>
+      </header>
       <div className={visible ? "post" : "invisible"}>
         <main>
           <div className="github_repo_container" onClick={seeRepoInfo}>
