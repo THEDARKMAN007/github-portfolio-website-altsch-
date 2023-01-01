@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ErrorBoundary from './components/error_boundary/error_boundary';
 import { HelmetProvider } from 'react-helmet-async';
+import "./index.css";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

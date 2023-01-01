@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate,useLocation } from "react-router-dom";
 import { Github } from './../github/github';
 import { Helmet } from "react-helmet-async";
+import { Header } from './../header';
 
 
 export const GithubRepo = () => {
@@ -128,14 +129,7 @@ export const GithubRepo = () => {
         <meta name="description" content="github repository list" />
         <link rel="canonical" href="/github_repo" />
       </Helmet>
-      <header className="header">
-        <div className="link" onClick={navigateToHome}>
-          Home
-        </div>
-        <div className="link" onClick={navigateToGithub}>
-          GitHub Repo.
-        </div>
-      </header>
+      <Header />
       <div className={visible ? "post" : "invisible"}>
         <main>
           <div className="github_repo_container" onClick={seeRepoInfo}>
