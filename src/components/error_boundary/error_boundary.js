@@ -11,7 +11,7 @@ class ErrorBoundary extends Component {
   }
   render() {
     if (this.state.hasError) {
-      return(<div className="container_404">
+      return(<div className="flex flex-col items-center justify-center bg-blue-500 gap-6">
         <h1>Oops, we done goofed up</h1>;
         <Link to='/'>home</Link>
       </div>);

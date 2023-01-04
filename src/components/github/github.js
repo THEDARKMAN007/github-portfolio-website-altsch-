@@ -1,38 +1,35 @@
-import "./github.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Header } from './../header';
+import { useLocation } from "react-router-dom";
+
 
 export const Github = (props) => {
-  const [state8, setState8] = useState({
-    name: "",
-    description: "",
-    size: "",
-    language: "",
-    created_at: "",
-    owner: "",
-    html_url: "",
-  });
+const location = useLocation();
 
-  useEffect(() => {
-    setState8(props.state7);
-  }, [props.state7]);
-
+let repo = location.state
+console.log(repo);
 
   return (
-    <div className={props.visible ? "invisible" : ""}>
-      <div className="repo_container">
-        <div>REPO_NAME: {state8.name}</div>
-        <div>DESC.: {state8.description}</div>
-        <div>FILE_SIZE: {state8.size}</div>
-        <div>LANGUAGE: {state8.language}</div>
-        <div>CREATED:{state8.created_at}</div>
+    <div>
+      <Header />
+      <main className="mx-auto border text-[max(0.6rem,1.5vw)] rounded-[1em] flex flex-col items-center justify-center w-[20em] my-[5em] p-[0.5em] gap-[0.5em] shadow-[0_5px_5px_0px_grey]">
+        <div>REPO_NAME: {repo.data.name}</div>
+        <div>OWNER: {repo.data.owner.login}</div>
+        <div>DESC.: {repo.data.description}</div>
+        <div>FILE_SIZE: {repo.data.size}</div>
+        <div>LANGUAGE: {repo.data.language}</div>
+        <div>CREATED: {repo.data.created_at}</div>
         <div>
           view this repo on{" "}
-          <a href={state8.html_url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={repo.data.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline cursor-pointer hover:text-blue-500"
+          >
             github
           </a>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

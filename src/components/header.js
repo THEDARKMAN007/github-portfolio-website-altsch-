@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export const Header = () => {
@@ -17,19 +17,6 @@ export const Header = () => {
         console.log(error);
       });
   }, []);
-
-
-
-  const navigate = useNavigate();
-
-  const navigateToHome = (e) => {
-    e.preventDefault();
-    navigate("/");
-  };
-  const navigateToGithub = (e) => {
-    e.preventDefault();
-    navigate("/github_repo");
-  };
   
   const showDropDownMenu = (e) => {
     e.preventDefault();
@@ -60,24 +47,24 @@ export const Header = () => {
               <div className="w-8 h-1 bg-black"></div>
             </nav>
             <nav className="hidden items-center  sm:flex justify-between w-100 flex-row w-[25%]">
-              <h1 onClick={navigateToHome} className="hover:cursor-pointer">
+              <Link to="/" className="hover:cursor-pointer">
                 Home
-              </h1>
-              <h1 onClick={navigateToGithub} className="hover:cursor-pointer">
+              </Link>
+              <Link to="/github_repo" className="hover:cursor-pointer">
                 Repository
-              </h1>
+              </Link>
             </nav>
           </div>
         </header>
         <nav
           className={`flex flex-col border ${hide} border-1 w-[20%] absolute h-[40vh] items-center justify-around `}
         >
-          <h1 onClick={navigateToHome} className="hover:cursor-pointer">
+          <Link to="/" className="hover:cursor-pointer">
             Home
-          </h1>
-          <h1 onClick={navigateToGithub} className="hover:cursor-pointer">
+          </Link>
+          <Link to="/github_repo" className="hover:cursor-pointer">
             Repository
-          </h1>
+          </Link>
         </nav>
         <hr />
       </div>

@@ -1,126 +1,119 @@
-import "./github_repo.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate,useLocation } from "react-router-dom";
-import { Github } from './../github/github';
+import { useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Header } from './../header';
-
+import { Header } from "./../header";
 
 export const GithubRepo = () => {
-  const [state4, setState4] = useState([
-    { name: "" },
-    { name: "" },
-    { name: "" },
-    { name: "" },
-    { name: "" },
-  ]);
-  const [state5, setState5] = useState(0);
-  const [state6, setState6] = useState(0);
-  const [state3, setState3] = useState("");
-  const [state7, setState7] = useState("");
-  const [visible, setVisible] = useState(true);
-  const navigate = useNavigate();
-  const location = useLocation()
+  const [buttons, setButtons] = useState([]);
+  const [state, setState] = useState(0);
+  const [toggle, setToggle] = useState('')
+  // const [value, setValue] = useState('block');
+  const location = useLocation();
 
-  const navigateToHome = (e) => {
+  //// Main  control for pagination settings of the page
+  let repoPerPage = 4;
+  let MostNoOfPagButtons = 3;
+
+  ////api data collection, repo display
+  const repoList = location.state.data;
+  let displayedRepo = repoList.map((repo) => {
+    return (
+      <Link to="/github_repo/github" state={{ data: repo }}
+      >
+        <div key={repo.id}>{repo.name}</div>
+      </Link>
+    );
+  });
+  console.log(displayedRepo);
+
+  let number = [];
+  for (let i = repoPerPage - 1; i >= 0; i--) {
+    number.push(i);
+  }
+  number = number.reverse();
+  let reposOnPage = number.map((number) => {
+    // if (typeof(displayedRepo[number + state] === null){
+    //   setValue('hidden')
+    // }else {
+    //   setValue('block')
+    // }
+
+    return (
+      <div
+        key={number + state}
+        className={`items-center justify-center border w-[max(10rem,50vw)] hover:bg-black hover:text-white  font-bold text-center mx-auto p-5 hover:cursor-pointer`}
+      >
+        {displayedRepo[number + state]}
+      </div>
+    );
+  });
+
+  // button onclick event handlers
+  const buttonHandler = (e) => {
     e.preventDefault();
-    navigate("/");
+    // console.log(e.target.innerHTML);
+    let newState = e.target.innerHTML * repoPerPage - repoPerPage;
+    setState(newState);
   };
-  const navigateToGithub = (e) => {
+
+  // const colorChanger = (e) => {
+  //   e.preventDefault();
+  //   setToggle("bg-white text-black")
+  //   e.target.classList.add("bg-black");
+  //   e.target.classList.add("text-white");
+
+  // }
+
+  ////pagination buttons
+  const buttonList = buttons.map((element) => (
+    <button
+      key={element}
+      className={`flex items-center justify-center border w-[max(4rem,10vw)] hover:cursor-pointer ${toggle}`}
+      onClick={(buttonHandler)}
+    >
+      {element}
+    </button>
+  ));
+// console.log(buttonList[0].key);
+
+  ////prev/next event handlers
+  const prev_next = (e) => {
     e.preventDefault();
-    navigate("/github_repo");
-  };
-
-
-  useEffect(() => {
-    fetch(`https://api.github.com/users/THEDARKMAN007`)
-      .then((response) => response.json())
-      .then((data) => {
-        setState3(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const url = state3.repos_url;
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        const data = res.data;
-        setState4(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [url]);
-
-  useEffect(() => {
-    if (location.pathname === '/github_repo') {
-    setVisible(true);
+    if (
+      e.target.innerHTML === "next" &&
+      buttons[buttons.length - 1] < maxButtonLength(repoPerPage)
+    ) {
+      setButtons((st) => st.map((st) => st + 1));
+      // let newState = (buttonList[0].key ) * repoPerPage - repoPerPage;
+      // setState(newState);
+    } else if (e.target.innerHTML === "prev" && buttons[0] !== 1) {
+      setButtons((st) => st.map((st) => st - 1));
     }
-  }, [location.pathname]);
-
-  const seeRepoInfo = (e) => {
-    e.preventDefault();
-    navigate("github");
-    setVisible(false)
-    let sum = -1
-  
-    do {
-        sum = sum + 1;
-      if (e.target.innerHTML === state4[state5 + sum].name) {
-        setState7(state4[state5 + sum]);
-      } 
-    } while (!(e.target.innerHTML === state4[state5 + sum].name));
   };
 
-  const repo1 = state4[state5].name;
-  const repo2 = state4[state5 + 1].name;
+  ////pagination engine
+  const maxButtonLength = (repoPerPage) => {
+    let a = Math.ceil(repoList.length / repoPerPage);
+    return a;
+  };
+  useEffect(() => {
+    let displayedButtonNo = Math.ceil(repoList.length / repoPerPage);
+    let arr = [];
 
-  const prev = (e) => {
-    e.preventDefault();
-    setState6((st) => {
-      if (state6 === 0) {
-        return 0;
-      } else {
-        return st - 1;
+    if (displayedButtonNo >= MostNoOfPagButtons) {
+      for (let i = MostNoOfPagButtons - 1; i >= 0; i--) {
+        arr.push(i + 1);
       }
-    });
-  };
-  const next = (e) => {
-    e.preventDefault();
-    setState6((st) => {
-      if (state6 >= Math.floor(state4.length / 2 - 4)) {
-        return Math.floor(state4.length / 2 - 4);
-      } else {
-        return st + 1;
+      arr = arr.reverse();
+      setButtons(arr);
+    } else {
+      for (let i = displayedButtonNo - 1; i >= 0; i--) {
+        arr.push(i + 1);
       }
-    });
-  };
-  const one = (e) => {
-    e.preventDefault();
-    let st = Number(e.target.innerHTML) * 2 - 2;
-    setState5(st);
-  };
-  const two = (e) => {
-    e.preventDefault();
-    let st = Number(e.target.innerHTML) * 2 - 2;
-    setState5(st);
-  };
-  const three = (e) => {
-    e.preventDefault();
-    let st = Number(e.target.innerHTML) * 2 - 2;
-    setState5(st);
-  };
-  const four = (e) => {
-    e.preventDefault();
-    let st = Number(e.target.innerHTML) * 2 - 2;
-    setState5(st);
-  };
+      arr = arr.reverse();
+      setButtons(arr);
+    }
+  }, [repoList, repoPerPage, MostNoOfPagButtons]);
 
   return (
     <div>
@@ -130,25 +123,24 @@ export const GithubRepo = () => {
         <link rel="canonical" href="/github_repo" />
       </Helmet>
       <Header />
-      <div className={visible ? "post" : "invisible"}>
-        <main>
-          <div className="github_repo_container" onClick={seeRepoInfo}>
-            {repo1}
-          </div>
-          <div className="github_repo_container" onClick={seeRepoInfo}>
-            {repo2}
-          </div>
-        </main>
-        <div className="pagination_buttons">
-          <div onClick={prev}>prev</div>
-          <div onClick={one}>{1 + state6}</div>
-          <div onClick={two}>{2 + state6}</div>
-          <div onClick={three}>{3 + state6}</div>
-          <div onClick={four}>{4 + state6}</div>
-          <div onClick={next}>next</div>
+      <main>
+        {reposOnPage}
+        <div className=" flex flex-row  mx-auto  items-center justify-center">
+          <button
+            className="border w-[max(4rem,10vw)] hover:cursor-pointer"
+            onClick={prev_next}
+          >
+            prev
+          </button>
+          {buttonList}
+          <button
+            className="border w-[max(4rem,10vw)] hover:cursor-pointer"
+            onClick={prev_next}
+          >
+            next
+          </button>
         </div>
-      </div>
-      <Github visible={visible} state7={state7} />
+      </main>
     </div>
   );
 };

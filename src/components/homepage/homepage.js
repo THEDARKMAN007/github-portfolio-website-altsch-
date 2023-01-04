@@ -1,20 +1,12 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import img from "../../assets/illustrator.svg";
-import { useNavigate } from 'react-router-dom';
 import { Header } from '../header';
+import { Link } from 'react-router-dom';
 
 export const HomePage = () => {
   const [state2, setState2] = useState({});
   const [state3, setState3] = useState([]);
-  const [state, setState] = useState('block');
-  const navigate = useNavigate();
-
-
-  const goToRepo = (e) => {
-    e.preventDefault();
-    navigate("/github_repo");
-  };
 
   useEffect(() => {
     fetch(`https://api.github.com/users/THEDARKMAN007`)
@@ -46,17 +38,18 @@ export const HomePage = () => {
   let languages = new Set(ans);
   languages = Array.from(languages);
   languages = languages.filter(lang=> lang !== null)
-  console.log(languages)
   languages = languages.map((lang) => {
     return (
       <div
         key={lang}
-        className={` text-white rounded-[2em] p-1 ${state} bg-black px-[1em] `}
+        className={` text-white rounded-[2em] p-1 bg-black px-[1em] `}
       >
         {lang}
       </div>
     );
   });
+
+  console.log(state3)
 
   return (
     <div className="font-mono">
@@ -66,7 +59,7 @@ export const HomePage = () => {
         <link rel="canonical" href="/" />
       </Helmet>
       <Header />
-    
+
       <main className=" flex flex-col flex-wrap min-h-[50vh] py-[5rem] gap-[4rem] sm:flex-row sm:gap-20 items-center justify-center ">
         <div>
           <section className="w-[10rem]  h-auto sm:w-[20rem]">
@@ -81,12 +74,10 @@ export const HomePage = () => {
               Hi, i'm {state2.name}. Front-end daveloper from Lagos, Nigeria.
             </div>
             <div>
-              <span
-                onClick={goToRepo}
-                className="underline cursor-pointer hover:text-blue-500"
+              <Link to="/github_repo" state={{ data: state3}}className="underline cursor-pointer hover:text-blue-500"
               >
                 click here
-              </span>{" "}
+              </Link>{" "}
               to see my repo
             </div>
             <div>
