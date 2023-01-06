@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import { HomePage } from './components/homepage/homepage';
-import { GithubRepo } from './components/github_repo/github_repo';
-import NotFound from './components/404_error/404_error_page';
-import { Github } from './components/github/github';
+import { HomePage } from "./components/homepage/homepage";
+import { GithubRepo } from "./components/github_repo/github_repo";
+import NotFound from "./components/404_error/404_error_page";
+import { Github } from "./components/github/github";
 
 function App() {
   return (

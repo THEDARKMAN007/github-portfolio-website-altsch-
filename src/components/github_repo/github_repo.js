@@ -6,25 +6,27 @@ import { Header } from "./../header";
 export const GithubRepo = () => {
   const [buttons, setButtons] = useState([]);
   const [state, setState] = useState(0);
-  const [toggle, setToggle] = useState('')
+  // const [toggle, setToggle] = useState('')
   // const [value, setValue] = useState('block');
   const location = useLocation();
 
   //// Main  control for pagination settings of the page
-  let repoPerPage = 4;
+  let repoPerPage = 3;
   let MostNoOfPagButtons = 3;
 
   ////api data collection, repo display
   const repoList = location.state.data;
   let displayedRepo = repoList.map((repo) => {
     return (
-      <Link to="/github_repo/github" state={{ data: repo }}
+      <Link
+        to="/github_repo/github"
+        state={{ data: repo }}
+        className="w-[100%]"
       >
         <div key={repo.id}>{repo.name}</div>
       </Link>
     );
   });
-  console.log(displayedRepo);
 
   let number = [];
   for (let i = repoPerPage - 1; i >= 0; i--) {
@@ -41,7 +43,7 @@ export const GithubRepo = () => {
     return (
       <div
         key={number + state}
-        className={`items-center justify-center border w-[max(10rem,50vw)] hover:bg-black hover:text-white  font-bold text-center mx-auto p-5 hover:cursor-pointer`}
+        className={`flex items-center justify-center border w-[18em] hover:bg-black hover:text-white  font-bold text-center mx-auto p-[0.5em] hover:cursor-pointer flex-wrap text-[max(1rem,1.8vw)] sm:text-[max(1rem,2vw)]`}
       >
         {displayedRepo[number + state]}
       </div>
@@ -56,25 +58,27 @@ export const GithubRepo = () => {
     setState(newState);
   };
 
+  // // to highlight what paggg number the page is on
   // const colorChanger = (e) => {
   //   e.preventDefault();
-  //   setToggle("bg-white text-black")
   //   e.target.classList.add("bg-black");
   //   e.target.classList.add("text-white");
-
+  //   setToggle(() => {
+  //     let st = "bg-white text-black";
+  //     return st;
+  //   });
   // }
 
   ////pagination buttons
   const buttonList = buttons.map((element) => (
     <button
       key={element}
-      className={`flex items-center justify-center border w-[max(4rem,10vw)] hover:cursor-pointer ${toggle}`}
-      onClick={(buttonHandler)}
+      className={`flex items-center justify-center border w-[6em] hover:cursor-pointer ${""} text-[max(0.6rem,1.5vw)] hover:bg-black hover:text-white hover:border-0 sm:text-[max(1rem,2vw)] `}
+      onClick={buttonHandler}
     >
       {element}
     </button>
   ));
-// console.log(buttonList[0].key);
 
   ////prev/next event handlers
   const prev_next = (e) => {
@@ -123,22 +127,24 @@ export const GithubRepo = () => {
         <link rel="canonical" href="/github_repo" />
       </Helmet>
       <Header />
-      <main>
-        {reposOnPage}
-        <div className=" flex flex-row  mx-auto  items-center justify-center">
-          <button
-            className="border w-[max(4rem,10vw)] hover:cursor-pointer"
-            onClick={prev_next}
-          >
-            prev
-          </button>
-          {buttonList}
-          <button
-            className="border w-[max(4rem,10vw)] hover:cursor-pointer"
-            onClick={prev_next}
-          >
-            next
-          </button>
+      <main className="w-[max(375px,100%)] min-h-[85vh] relative">
+        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          <div className="flex flex-col gap-[0.5em]">{reposOnPage}</div>
+          <div className=" flex flex-row  mx-auto  items-center justify-center mt-[3em]">
+            <button
+              className="border w-[6em] hover:cursor-pointer text-[max(0.6rem,1.5vw)] hover:bg-black hover:text-white hover:border-0 sm:text-[max(1rem,2vw)]"
+              onClick={prev_next}
+            >
+              prev
+            </button>
+            {buttonList}
+            <button
+              className="border w-[6em] hover:cursor-pointer text-[max(0.6rem,1.5vw)] hover:bg-black hover:text-white hover:border-0 sm:text-[max(1rem,2vw)]"
+              onClick={prev_next}
+            >
+              next
+            </button>
+          </div>
         </div>
       </main>
     </div>
