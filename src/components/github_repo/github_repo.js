@@ -1,26 +1,29 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Header } from "./../header";
 
 export const GithubRepo = () => {
+  const [hide, setHide] = useState("hidden");
   const [buttons, setButtons] = useState([]);
   const [state, setState] = useState(0);
   // const [toggle, setToggle] = useState('')
   // const [value, setValue] = useState('block');
   const location = useLocation();
+  const navigate = useNavigate();
 
   //// Main  control for pagination settings of the page
   let repoPerPage = 3;
   let MostNoOfPagButtons = 3;
 
+  let repoList = location.state.data.data;
   ////api data collection, repo display
-  const repoList = location.state.data;
   let displayedRepo = repoList.map((repo) => {
     return (
       <Link
         to="/github_repo/github"
-        state={{ data: repo }}
+        state={{
+          data: { data: repo, state2: location.state.data.state2.avatar_url },
+        }}
         className="w-[100%]"
       >
         <div key={repo.id}>{repo.name}</div>
@@ -119,6 +122,23 @@ export const GithubRepo = () => {
     }
   }, [repoList, repoPerPage, MostNoOfPagButtons]);
 
+  const goToHomepage = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
+  const goLoginPage = (e) => {
+    e.preventDefault();
+    navigate(-2);
+  };
+  const showDropDownMenu = (e) => {
+    e.preventDefault();
+    if (hide === "hidden") {
+      setHide("block");
+    } else {
+      setHide("hidden");
+    }
+  };
+
   return (
     <div>
       <Helmet>
@@ -126,7 +146,50 @@ export const GithubRepo = () => {
         <meta name="description" content="github repository list" />
         <link rel="canonical" href="/github_repo" />
       </Helmet>
-      <Header />
+      <header>
+        <div className="flex justify-between text-[max(1rem,2.13vw)] w-4/5 mx-auto flex-row h-[3em] ">
+          <div className="flex flex-row items-center justify-center gap-[max(0.75rem,3.2vw)]">
+            <img
+              src={location.state.data.state2.avatar_url}
+              alt="user_image"
+              className="w-[max(1.8rem,3vw)] h-[max(1.8rem,3vw)] rounded-full"
+            />
+            <h1 className="font-black text-[max(1rem,2.13vw)]">Portfolio</h1>
+          </div>
+
+          {/*mobile */}
+          <nav
+            className="flex flex-col gap-1 justify-center hover:cursor-pointer  sm:hidden"
+            onClick={showDropDownMenu}
+          >
+            <div className="w-8 h-1 bg-black "></div>
+            <div className="w-8 h-1 bg-black"></div>
+            <div className="w-8 h-1 bg-black"></div>
+          </nav>
+
+          {/*desktop*/}
+          <nav className="hidden items-center text-[max(1rem,2.13vw)] sm:flex justify-between flex-row w-[12em]">
+            <div onClick={goLoginPage} className="hover:cursor-pointer">
+              LogIn
+            </div>
+            <div onClick={goToHomepage} className="hover:cursor-pointer">
+              Homepage
+            </div>
+          </nav>
+        </div>
+      </header>
+      {/*modal*/}
+      <nav
+        className={`flex flex-col border ${hide} border-1 w-[max(10em,40%)] absolute items-center justify-around left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-white text-[max(1.5rem,6.4vw)] gap-[1em] font-bold py-[1em] sm:hidden z-10`}
+      >
+        <div onClick={goLoginPage} className="hover:cursor-pointer">
+          LogIn
+        </div>
+        <div onClick={goToHomepage} className="hover:cursor-pointer">
+          Homepage
+        </div>
+      </nav>
+      <hr />
       <main className="w-[max(375px,100%)] min-h-[85vh] relative">
         <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <div className="flex flex-col gap-[0.5em]">{reposOnPage}</div>
